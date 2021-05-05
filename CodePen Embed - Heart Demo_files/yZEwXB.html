@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+
+
+  <title>CodePen - Heart Demo</title>
+  
+  
+  
+  
+<style>
+body	{
+	background-color : #ffceed;
+}
+@keyframes heartfade {
+	0% {
+	  opacity : 1;
+  }
+	50% {
+	  opacity : 0;
+  }
+}
+.heart {
+	z-index : 999;
+	animation : heartfade 6s linear;
+	position : absolute; 
+}
+.heart:before,
+.heart:after {
+	content : "";
+	background-color : #fc2a62;
+	position : absolute;
+	height : 30px;
+	width : 45px;
+	border-radius : 15px 0px 0px 15px;
+}
+
+.heart:before {
+	transform : rotate(45deg);
+}
+
+.heart:after {
+	left : 10.5px;
+	transform : rotate(135deg);
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no">
+  
+    <script src="yZEwXB_data/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a6.js"></script>
+
+  
+  
+      <script id="rendered-js">
+var brd = document.createElement("DIV");
+document.body.insertBefore(brd, document.getElementById("board"));
+
+const duration = 3000;
+const speed = 0.5;
+const cursorXOffset = 0;
+const cursorYOffset = -5;
+
+var hearts = [];
+
+function generateHeart(x, y, xBound, xStart, scale)
+{
+  var heart = document.createElement("DIV");
+  heart.setAttribute('class', 'heart');
+  brd.appendChild(heart);
+  heart.time = duration;
+  heart.x = x;
+  heart.y = y;
+  heart.bound = xBound;
+  heart.direction = xStart;
+  heart.style.left = heart.x + "px";
+  heart.style.top = heart.y + "px";
+  heart.scale = scale;
+  heart.style.transform = "scale(" + scale + "," + scale + ")";
+  if (hearts == null)
+  hearts = [];
+  hearts.push(heart);
+  return heart;
+}
+
+var down = false;
+var event = null;
+
+document.onmousedown = function (e) {
+  down = true;
+  event = e;
+};
+
+document.onmouseup = function (e) {
+  down = false;
+};
+
+document.onmousemove = function (e) {
+  event = e;
+};
+
+document.ontouchstart = function (e) {
+  down = true;
+  event = e.touches[0];
+};
+
+document.ontouchend = function (e) {
+  down = false;
+};
+
+document.ontouchmove = function (e) {
+  event = e.touches[0];
+};
+
+var before = Date.now();
+var id = setInterval(frame, 5);
+var gr = setInterval(check, 100);
+
+function frame()
+{
+  var current = Date.now();
+  var deltaTime = current - before;
+  before = current;
+  for (i in hearts)
+  {
+    var heart = hearts[i];
+    heart.time -= deltaTime;
+    if (heart.time > 0)
+    {
+      heart.y -= speed;
+      heart.style.top = heart.y + "px";
+      heart.style.left = heart.x + heart.direction * heart.bound * Math.sin(heart.y * heart.scale / 30) / heart.y * 100 + "px";
+    } else
+
+    {
+      heart.parentNode.removeChild(heart);
+      hearts.splice(i, 1);
+    }
+  }
+}
+
+function check()
+{
+  if (down)
+  {
+    var start = 1 - Math.round(Math.random()) * 2;
+    var scale = Math.random() * Math.random() * 0.8 + 0.2;
+    var bound = 30 + Math.random() * 20;
+    generateHeart(event.pageX - brd.offsetLeft + cursorXOffset, event.pageY - brd.offsetTop + cursorYOffset, bound, start, scale);
+  }
+}
+//# sourceURL=pen.js
+    </script><div></div>
+
+  
+
+  <script src="yZEwXB_data/iframeRefreshCSS-e03f509ba0a671350b4b363ff105b2eb009850f34a2b.js"></script>
+
+
+
+ 
+</body></html>

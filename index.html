@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>CodePen Embed - Heart Demo</title>
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="01PdKZdr6B9kejouR8udCpJ4c80B7DNOsyrdHv+Hx2D7JJLTj8YH7rm2uAutHom4vLBjJodbsfpDZDM1ibysoA==">
+<link rel="stylesheet" media="all" href="CodePen%20Embed%20-%20Heart%20Demo_files/embed-2e2d532b5652f06bfee2af536a079de363d3fec8b0c41897cfe425.css">
+<style>
+    .hide {
+      display: none !important;
+    }
+
+    #result-box {
+      background: #3d3d3e;
+      color: #ffffff;
+    }
+    .embed-footer,
+    .embed-nav {
+      background: #3d3d3e;
+      
+    }
+    .embed-nav .code-types a,
+    .embed-nav .result-button-list a,
+    .action-button {
+      color: #ffffff;
+      background-color: #666666;
+    }
+    .embed-nav .code-types a.active,
+    .embed-nav .result-button-list a.active,
+    .action-button.active {
+      background: #888888;
+      color: #ffffff;
+      box-shadow: inset 0px 3px #dddddd;
+    }
+    .embed-nav .logo-wrap .edit-on-codepen {
+      color: #ffffff;
+    }
+
+    .embed-nav svg {
+      stroke: #ffffff !important;
+    }
+  </style>
+<link rel="stylesheet" media="all" href="CodePen%20Embed%20-%20Heart%20Demo_files/twilight-bbb3d58f8024c27567f788f3990f2dce8754c2b67246bf12ad7.css">
+<meta name="monetization" content="$ilp.uphold.com/biyqg2MkQKbe">
+</head>
+<body id="the-body" style="border: 0px solid #555555; --borderWidth: 1px;" class="codepen-embed-body results-active single-output static">
+<div id="output" data-border-style="thin" data-header="true" Style= "height: 100%">
+<div id="js-box" class="code-wrap code-box box" role="region" aria-label="JS">
+<pre><code data-lang="javascript" id="actual-js-code" class=" cm-s-default"><span class="cm-keyword">var</span> <span class="cm-def">brd</span> <span class="cm-operator">=</span> <span class="cm-variable">document</span>.<span class="cm-property">createElement</span>(<span class="cm-string">"DIV"</span>);
+<span class="cm-variable">document</span>.<span class="cm-property">body</span>.<span class="cm-property">insertBefore</span>(<span class="cm-variable">brd</span>, <span class="cm-variable">document</span>.<span class="cm-property">getElementById</span>(<span class="cm-string">"board"</span>));
+
+<span class="cm-keyword">const</span> <span class="cm-def">duration</span> <span class="cm-operator">=</span> <span class="cm-number">3000</span>;
+<span class="cm-keyword">const</span> <span class="cm-def">speed</span> <span class="cm-operator">=</span> <span class="cm-number">0.5</span>;
+<span class="cm-keyword">const</span> <span class="cm-def">cursorXOffset</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>;
+<span class="cm-keyword">const</span> <span class="cm-def">cursorYOffset</span> <span class="cm-operator">=</span> <span class="cm-operator">-</span><span class="cm-number">5</span>;
+
+<span class="cm-keyword">var</span> <span class="cm-def">hearts</span> <span class="cm-operator">=</span> [];
+        
+<span class="cm-keyword">function</span> <span class="cm-def">generateHeart</span>(<span class="cm-def">x</span>, <span class="cm-def">y</span>, <span class="cm-def">xBound</span>, <span class="cm-def">xStart</span>, <span class="cm-def">scale</span>)
+{
+    <span class="cm-keyword">var</span> <span class="cm-def">heart</span> <span class="cm-operator">=</span> <span class="cm-variable">document</span>.<span class="cm-property">createElement</span>(<span class="cm-string">"DIV"</span>);
+    <span class="cm-variable-2">heart</span>.<span class="cm-property">setAttribute</span>(<span class="cm-string">'class'</span>, <span class="cm-string">'heart'</span>);
+    <span class="cm-variable">brd</span>.<span class="cm-property">appendChild</span>(<span class="cm-variable-2">heart</span>);
+    <span class="cm-variable-2">heart</span>.<span class="cm-property">time</span> <span class="cm-operator">=</span> <span class="cm-variable">duration</span>;
+    <span class="cm-variable-2">heart</span>.<span class="cm-property">x</span> <span class="cm-operator">=</span> <span class="cm-variable-2">x</span>;
+    <span class="cm-variable-2">heart</span>.<span class="cm-property">y</span> <span class="cm-operator">=</span> <span class="cm-variable-2">y</span>;
+    <span class="cm-variable-2">heart</span>.<span class="cm-property">bound</span> <span class="cm-operator">=</span> <span class="cm-variable-2">xBound</span>;
+    <span class="cm-variable-2">heart</span>.<span class="cm-property">direction</span> <span class="cm-operator">=</span> <span class="cm-variable-2">xStart</span>;
+    <span class="cm-variable-2">heart</span>.<span class="cm-property">style</span>.<span class="cm-property">left</span> <span class="cm-operator">=</span> <span class="cm-variable-2">heart</span>.<span class="cm-property">x</span> <span class="cm-operator">+</span> <span class="cm-string">"px"</span>;
+    <span class="cm-variable-2">heart</span>.<span class="cm-property">style</span>.<span class="cm-property">top</span> <span class="cm-operator">=</span> <span class="cm-variable-2">heart</span>.<span class="cm-property">y</span> <span class="cm-operator">+</span> <span class="cm-string">"px"</span>;
+    <span class="cm-variable-2">heart</span>.<span class="cm-property">scale</span> <span class="cm-operator">=</span> <span class="cm-variable-2">scale</span>;
+    <span class="cm-variable-2">heart</span>.<span class="cm-property">style</span>.<span class="cm-property">transform</span> <span class="cm-operator">=</span> <span class="cm-string">"scale("</span> <span class="cm-operator">+</span> <span class="cm-variable-2">scale</span> <span class="cm-operator">+</span> <span class="cm-string">","</span> <span class="cm-operator">+</span> <span class="cm-variable-2">scale</span> <span class="cm-operator">+</span> <span class="cm-string">")"</span>;
+    <span class="cm-keyword">if</span>(<span class="cm-variable">hearts</span> <span class="cm-operator">==</span> <span class="cm-atom">null</span>)
+        <span class="cm-variable">hearts</span> <span class="cm-operator">=</span> [];
+    <span class="cm-variable">hearts</span>.<span class="cm-property">push</span>(<span class="cm-variable-2">heart</span>);
+    <span class="cm-keyword">return</span> <span class="cm-variable-2">heart</span>;
+}
+
+<span class="cm-keyword">var</span> <span class="cm-def">down</span> <span class="cm-operator">=</span> <span class="cm-atom">false</span>;
+<span class="cm-keyword">var</span> <span class="cm-def">event</span> <span class="cm-operator">=</span> <span class="cm-atom">null</span>;
+
+<span class="cm-variable">document</span>.<span class="cm-property">onmousedown</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">e</span>) {
+    <span class="cm-variable">down</span> <span class="cm-operator">=</span> <span class="cm-atom">true</span>;
+    <span class="cm-variable">event</span> <span class="cm-operator">=</span> <span class="cm-variable-2">e</span>;
+}
+
+<span class="cm-variable">document</span>.<span class="cm-property">onmouseup</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">e</span>) {
+    <span class="cm-variable">down</span> <span class="cm-operator">=</span> <span class="cm-atom">false</span>;
+}
+
+<span class="cm-variable">document</span>.<span class="cm-property">onmousemove</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">e</span>) {
+    <span class="cm-variable">event</span> <span class="cm-operator">=</span> <span class="cm-variable-2">e</span>;
+}
+
+<span class="cm-variable">document</span>.<span class="cm-property">ontouchstart</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">e</span>) {
+    <span class="cm-variable">down</span> <span class="cm-operator">=</span> <span class="cm-atom">true</span>;
+    <span class="cm-variable">event</span> <span class="cm-operator">=</span> <span class="cm-variable-2">e</span>.<span class="cm-property">touches</span>[<span class="cm-number">0</span>];
+}
+
+<span class="cm-variable">document</span>.<span class="cm-property">ontouchend</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">e</span>) {
+    <span class="cm-variable">down</span> <span class="cm-operator">=</span> <span class="cm-atom">false</span>;
+}
+
+<span class="cm-variable">document</span>.<span class="cm-property">ontouchmove</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">e</span>) {
+    <span class="cm-variable">event</span> <span class="cm-operator">=</span> <span class="cm-variable-2">e</span>.<span class="cm-property">touches</span>[<span class="cm-number">0</span>];
+}
+
+<span class="cm-keyword">var</span> <span class="cm-def">before</span> <span class="cm-operator">=</span> <span class="cm-variable">Date</span>.<span class="cm-property">now</span>();
+<span class="cm-keyword">var</span> <span class="cm-def">id</span> <span class="cm-operator">=</span> <span class="cm-variable">setInterval</span>(<span class="cm-variable">frame</span>, <span class="cm-number">5</span>);
+<span class="cm-keyword">var</span> <span class="cm-def">gr</span> <span class="cm-operator">=</span> <span class="cm-variable">setInterval</span>(<span class="cm-variable">check</span>, <span class="cm-number">100</span>);
+
+<span class="cm-keyword">function</span> <span class="cm-def">frame</span>()
+{
+    <span class="cm-keyword">var</span> <span class="cm-def">current</span> <span class="cm-operator">=</span> <span class="cm-variable">Date</span>.<span class="cm-property">now</span>();
+    <span class="cm-keyword">var</span> <span class="cm-def">deltaTime</span> <span class="cm-operator">=</span> <span class="cm-variable-2">current</span> <span class="cm-operator">-</span> <span class="cm-variable">before</span>;
+    <span class="cm-variable">before</span> <span class="cm-operator">=</span> <span class="cm-variable-2">current</span>;
+    <span class="cm-keyword">for</span>(<span class="cm-variable">i</span> <span class="cm-keyword">in</span> <span class="cm-variable">hearts</span>)
+    {
+        <span class="cm-keyword">var</span> <span class="cm-def">heart</span> <span class="cm-operator">=</span> <span class="cm-variable">hearts</span>[<span class="cm-variable">i</span>];
+        <span class="cm-variable-2">heart</span>.<span class="cm-property">time</span> <span class="cm-operator">-=</span> <span class="cm-variable-2">deltaTime</span>;
+        <span class="cm-keyword">if</span>(<span class="cm-variable-2">heart</span>.<span class="cm-property">time</span> <span class="cm-operator">&gt;</span> <span class="cm-number">0</span>)
+        {
+            <span class="cm-variable-2">heart</span>.<span class="cm-property">y</span> <span class="cm-operator">-=</span> <span class="cm-variable">speed</span>;
+            <span class="cm-variable-2">heart</span>.<span class="cm-property">style</span>.<span class="cm-property">top</span> <span class="cm-operator">=</span> <span class="cm-variable-2">heart</span>.<span class="cm-property">y</span> <span class="cm-operator">+</span> <span class="cm-string">"px"</span>;
+            <span class="cm-variable-2">heart</span>.<span class="cm-property">style</span>.<span class="cm-property">left</span> <span class="cm-operator">=</span> <span class="cm-variable-2">heart</span>.<span class="cm-property">x</span> <span class="cm-operator">+</span> <span class="cm-variable-2">heart</span>.<span class="cm-property">direction</span> <span class="cm-operator">*</span> <span class="cm-variable-2">heart</span>.<span class="cm-property">bound</span> <span class="cm-operator">*</span> <span class="cm-variable">Math</span>.<span class="cm-property">sin</span>(<span class="cm-variable-2">heart</span>.<span class="cm-property">y</span> <span class="cm-operator">*</span> <span class="cm-variable-2">heart</span>.<span class="cm-property">scale</span> <span class="cm-operator">/</span> <span class="cm-number">30</span>) <span class="cm-operator">/</span> <span class="cm-variable-2">heart</span>.<span class="cm-property">y</span> <span class="cm-operator">*</span> <span class="cm-number">100</span> <span class="cm-operator">+</span> <span class="cm-string">"px"</span>;
+    }
+        <span class="cm-keyword">else</span>
+        {
+            <span class="cm-variable-2">heart</span>.<span class="cm-property">parentNode</span>.<span class="cm-property">removeChild</span>(<span class="cm-variable-2">heart</span>);
+            <span class="cm-variable">hearts</span>.<span class="cm-property">splice</span>(<span class="cm-variable">i</span>, <span class="cm-number">1</span>);
+        }
+    }
+}
+
+<span class="cm-keyword">function</span> <span class="cm-def">check</span>()
+{
+    <span class="cm-keyword">if</span>(<span class="cm-variable">down</span>)
+    {
+        <span class="cm-keyword">var</span> <span class="cm-def">start</span> <span class="cm-operator">=</span> <span class="cm-number">1</span> <span class="cm-operator">-</span> <span class="cm-variable">Math</span>.<span class="cm-property">round</span>(<span class="cm-variable">Math</span>.<span class="cm-property">random</span>()) <span class="cm-operator">*</span> <span class="cm-number">2</span>;
+        <span class="cm-keyword">var</span> <span class="cm-def">scale</span> <span class="cm-operator">=</span> <span class="cm-variable">Math</span>.<span class="cm-property">random</span>() <span class="cm-operator">*</span> <span class="cm-variable">Math</span>.<span class="cm-property">random</span>() <span class="cm-operator">*</span> <span class="cm-number">0.8</span> <span class="cm-operator">+</span> <span class="cm-number">0.2</span>;
+        <span class="cm-keyword">var</span> <span class="cm-def">bound</span> <span class="cm-operator">=</span> <span class="cm-number">30</span> <span class="cm-operator">+</span> <span class="cm-variable">Math</span>.<span class="cm-property">random</span>() <span class="cm-operator">*</span> <span class="cm-number">20</span>;
+        <span class="cm-variable">generateHeart</span>(<span class="cm-variable">event</span>.<span class="cm-property">pageX</span> <span class="cm-operator">-</span> <span class="cm-variable">brd</span>.<span class="cm-property">offsetLeft</span> <span class="cm-operator">+</span> <span class="cm-variable">cursorXOffset</span>, <span class="cm-variable">event</span>.<span class="cm-property">pageY</span> <span class="cm-operator">-</span> <span class="cm-variable">brd</span>.<span class="cm-property">offsetTop</span> <span class="cm-operator">+</span> <span class="cm-variable">cursorYOffset</span>, <span class="cm-variable-2">bound</span>, <span class="cm-variable-2">start</span>, <span class="cm-variable-2">scale</span>);
+    }
+}</code></pre>
+</div>
+<div id="result-box" class="code-box zoom-1 active" role="region" aria-label="Result">
+<iframe allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; vr" allowfullscreen="false" allowpaymentrequest="false" allowtransparency="true" class="result-iframe " id="result-iframe" name="CodePen Preview for Heart Demo" sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" scrolling="yes" tabindex="-1" title="CodePen Preview for Heart Demo" data-src="https://cdpn.io/shenhuang/fullembedgrid/yZEwXB?animations=run&amp;type=embed" src="CodePen%20Embed%20-%20Heart%20Demo_files/yZEwXB.html" frameborder="0">
+  </iframe>
+</div>
+</div>
+<script>
+    __processedPen = {"html":"","css":"body\t{\n\tbackground-color : #ffceed;\n}\n@keyframes heartfade {\n\t0% {\n\t  opacity : 1;\n  }\n\t50% {\n\t  opacity : 0;\n  }\n}\n.heart {\n\tz-index : 999;\n\tanimation : heartfade 6s linear;\n\tposition : absolute; \n}\n.heart:before,\n.heart:after {\n\tcontent : &quot;&quot;;\n\tbackground-color : #fc2a62;\n\tposition : absolute;\n\theight : 30px;\n\twidth : 45px;\n\tborder-radius : 15px 0px 0px 15px;\n}\n\n.heart:before {\n\ttransform : rotate(45deg);\n}\n\n.heart:after {\n\tleft : 10.5px;\n\ttransform : rotate(135deg);\n}","js":"var brd = document.createElement(&quot;DIV&quot;);\ndocument.body.insertBefore(brd, document.getElementById(&quot;board&quot;));\n\nconst duration = 3000;\nconst speed = 0.5;\nconst cursorXOffset = 0;\nconst cursorYOffset = -5;\n\nvar hearts = [];\n\nfunction generateHeart(x, y, xBound, xStart, scale)\n{\n  var heart = document.createElement(&quot;DIV&quot;);\n  heart.setAttribute(&#39;class&#39;, &#39;heart&#39;);\n  brd.appendChild(heart);\n  heart.time = duration;\n  heart.x = x;\n  heart.y = y;\n  heart.bound = xBound;\n  heart.direction = xStart;\n  heart.style.left = heart.x + &quot;px&quot;;\n  heart.style.top = heart.y + &quot;px&quot;;\n  heart.scale = scale;\n  heart.style.transform = &quot;scale(&quot; + scale + &quot;,&quot; + scale + &quot;)&quot;;\n  if (hearts == null)\n  hearts = [];\n  hearts.push(heart);\n  return heart;\n}\n\nvar down = false;\nvar event = null;\n\ndocument.onmousedown = function (e) {\n  down = true;\n  event = e;\n};\n\ndocument.onmouseup = function (e) {\n  down = false;\n};\n\ndocument.onmousemove = function (e) {\n  event = e;\n};\n\ndocument.ontouchstart = function (e) {\n  down = true;\n  event = e.touches[0];\n};\n\ndocument.ontouchend = function (e) {\n  down = false;\n};\n\ndocument.ontouchmove = function (e) {\n  event = e.touches[0];\n};\n\nvar before = Date.now();\nvar id = setInterval(frame, 5);\nvar gr = setInterval(check, 100);\n\nfunction frame()\n{\n  var current = Date.now();\n  var deltaTime = current - before;\n  before = current;\n  for (i in hearts)\n  {\n    var heart = hearts[i];\n    heart.time -= deltaTime;\n    if (heart.time &gt; 0)\n    {\n      heart.y -= speed;\n      heart.style.top = heart.y + &quot;px&quot;;\n      heart.style.left = heart.x + heart.direction * heart.bound * Math.sin(heart.y * heart.scale / 30) / heart.y * 100 + &quot;px&quot;;\n    } else\n\n    {\n      heart.parentNode.removeChild(heart);\n      hearts.splice(i, 1);\n    }\n  }\n}\n\nfunction check()\n{\n  if (down)\n  {\n    var start = 1 - Math.round(Math.random()) * 2;\n    var scale = Math.random() * Math.random() * 0.8 + 0.2;\n    var bound = 30 + Math.random() * 20;\n    generateHeart(event.pageX - brd.offsetLeft + cursorXOffset, event.pageY - brd.offsetTop + cursorYOffset, bound, start, scale);\n  }\n}"};
+    __preprocessors = {
+      "html": "none",
+      "css": "none",
+      "js": "none"
+    };
+    __preprocessorNames = {
+      "html": "HTML",
+      "css": "CSS",
+      "js": "JS"
+    };
+    __pageType = "embed";
+    __editable = false;
+    __embed_prefill = false;
+  </script>
+<script src="CodePen%20Embed%20-%20Heart%20Demo_files/embed-38a163bf47775725508cdf8a8f5cac7bbac97ef0be44672ef22f5c2.js"></script>
+
+
+</body></html>
